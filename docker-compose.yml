@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # ========================================================
+  # 1. Baza danych PostgreSQL (Waitlista & Konsultacje)
+  # ========================================================
+  diet-med-landing-db:
+    container_name: diet-med-landing-DB
+    build: ./landing-db
+    restart: unless-stopped
+    ports:
+      - "${LANDING_DB_PORT:-5433}:5432"
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-diet_med_landing}
+      POSTGRES_USER: ${POSTGRES_USER:-landing_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-landing_password_secure}
+    volumes:
+      - diet_med_landing_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-landing_user} -d ${POSTGRES_DB:-diet_med_landing}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - diet-med-landing-net
+
+  # ========================================================
+  # 2. Lekki Backend API (FastAPI)
+  # ========================================================
+  diet-med-landing-backend:
+    container_name: diet-med-landing-backend
+    build: ./landing-backend
+    restart: unless-stopped
+    ports:
+      - "${LANDING_BACKEND_PORT:-8001}:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-landing_user}:${POSTGRES_PASSWORD:-landing_password_secure}@diet-med-landing-DB:5432/${POSTGRES_DB:-diet_med_landing}
+    depends_on:
+      diet-med-landing-db:
+        condition: service_healthy
+    networks:
+      - diet-med-landing-net
+
+  # ========================================================
+  # 3. Frontend Landing Page (Nginx + HTML/CSS/JS)
+  # ========================================================
+  diet-med-landing-frontend:
+    container_name: diet-med-landing-frontend
+    build: ./landing-frontend
+    restart: unless-stopped
+    ports:
+      - "${LANDING_FRONTEND_PORT:-3001}:80"
+    depends_on:
+      - diet-med-landing-backend
+    networks:
+      - diet-med-landing-net
+
+networks:
+  diet-med-landing-net:
+    name: diet-med-landing-net
+    driver: bridge
+
+volumes:
+  diet_med_landing_db_data:
+    name: diet_med_landing_db_data

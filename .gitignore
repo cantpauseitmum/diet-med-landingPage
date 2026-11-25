@@ -1,0 +1,29 @@
+# Pliki środowiskowe i konfiguracyjne
+.env
+.env.*
+!.env.example
+
+# Python bytecode & testy lokalne
+__pycache__/
+*.py[cod]
+*$py.class
+*.db
+*.sqlite3
+
+# Dokumenty wewnętrzne, reguły AI i wyceny
+WYCENA_PROJEKTU.md
+wycena*.md
+AGENTS.md
+GEMINI.md
+*.odt
+*.xlsx
+*.docx
+
+# Zależności i build (jeśli używane)
+node_modules/
+dist/
+build/
+
+# Systemowe
+.DS_Store
+*.log

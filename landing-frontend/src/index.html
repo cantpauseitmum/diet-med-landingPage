@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diet-Med App | Jedz bezpiecznie przy wielochorobowości</title>
+  <meta name="description" content="Diet-Med App — Twój żywieniowy asystent przy wielochorobowości stworzony przez dietetyka klinicznego Olgę Felicjaniak. Przetestuj Live Demo i zapisz się na premierę aplikacji mobilnej.">
+
+  <!-- OpenGraph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Diet-Med App | Jedz bezpiecznie przy wielochorobowości">
+  <meta property="og:description" content="Przestań zgadywać, co wolno Ci zjeść, gdy zalecenia dla Twoich chorób wzajemnie się wykluczają. Sprawdź Live Demo i dołącz do listy oczekujących.">
+  <meta property="og:locale" content="pl_PL">
+
+  <!-- ======================================================== -->
+  <!-- KONFIGURACJA ANALITYKI I DOMENY DEMO                     -->
+  <!-- Podmień puste ID na własne klucze GA4 oraz Meta Pixel    -->
+  <!-- ======================================================== -->
+  <script>
+    window.DIET_MED_CONFIG = {
+      // Domyślny URL do Live Demo — jeśli landing stoi na landing.diet-med-app.*,
+      // skrypt automatycznie zamieni 'landing.' na 'app.' zachowując domenę.
+      DEMO_URL: 'https://app.diet-med-app.pl',
+      GA4_ID: '',        // np. 'G-XXXXXXXXXX'
+      META_PIXEL_ID: ''  // np. '123456789012345'
+    };
+  </script>
+
+  <!-- ======================================================== -->
+  <!-- MIEJSCE NA GOOGLE ANALYTICS 4 (GA4)                      -->
+  <!-- Odkomentuj poniższy blok i wpisz swój kod G-XXXXXXXXXX   -->
+  <!-- ======================================================== -->
+  <!--
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX', { 'anonymize_ip': true });
+  </script>
+  -->
+
+  <!-- ======================================================== -->
+  <!-- MIEJSCE NA META PIXEL (FACEBOOK / INSTAGRAM PIXEL)       -->
+  <!-- Odkomentuj poniższy blok i wpisz swój TWÓJ_PIXEL_ID      -->
+  <!-- ======================================================== -->
+  <!--
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'TWOJ_PIXEL_ID');
+    fbq('track', 'PageView');
+  </script>
+  -->
+
+  <!-- Czcionka Lato zgodna z motywem DIET-MED -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+  <link rel="shortcut icon" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
+  <link rel="stylesheet" href="css/style.css?v=1.0">
+</head>
+<body class="diet-med-theme">
+
+  <!-- ======================================================== -->
+  <!-- 1. GÓRNY PASEK KONTAKTOWY (#top-header)                  -->
+  <!-- ======================================================== -->
+  <div id="top-header">
+    <div class="container clearfix">
+      <div class="top-contact-info">
+        <span class="top-phone">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.72 11.72 0 003.68.59 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.72 11.72 0 00.59 3.68 1 1 0 01-.24 1.02l-2.23 2.09z"/></svg>
+          <a href="tel:+48602742411">+48 602 742 411</a>
+        </span>
+        <span class="top-email">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="mailto:poczta@diet-med.pl">poczta@diet-med.pl</a>
+        </span>
+      </div>
+      <div class="top-hours">
+        <span>Gabinet DIET-MED Poznań • Przyjęcia: wtorek 9.00-13.00, 16.00-19:00</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- 2. GŁÓWNA NAWIGACJA (#main-header)                       -->
+  <!-- ======================================================== -->
+  <header id="main-header">
+    <div class="container clearfix">
+      <div class="logo_container">
+        <a href="#" title="Diet-Med App">
+          <img src="assets/logo.jpg" alt="DIET-MED Logo" id="logo" onerror="this.src='https://diet-med.pl/wp-content/uploads/2020/07/logo-duże.jpg';">
+        </a>
+      </div>
+      <nav id="top-menu-nav" aria-label="Menu główne">
+        <ul id="top-menu" class="nav">
+          <li><a href="#rozwiazanie">Jak pomagamy</a></li>
+          <li><a href="#jak-dziala">Funkcje aplikacji</a></li>
+          <li><a href="#symulator">Mini-symulator AI</a></li>
+          <li><a href="#o-tworczyni">O twórczyni</a></li>
+          <li><a href="#zapis">Waiting List</a></li>
+          <li>
+            <a href="https://app.diet-med-app.pl" data-demo-link="true" target="_blank" rel="noopener" class="nav-demo-pill">
+              Otwórz Live Demo &rarr;
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 3. SEKCJA HERO (PIERWSZE WRAŻENIE + PHONE MOCKUP)        -->
+  <!-- ======================================================== -->
+  <section class="hero-banner hero-landing">
+    <div class="hero-overlay"></div>
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <div class="hero-badge-pill">
+          <span class="pulse-dot"></span>
+          <span>Aplikacja mobilna w przygotowaniu &bull; Wersja Demo działa już online</span>
+        </div>
+
+        <h1 class="hero-title hero-title-landing">Jedz bezpiecznie przy wielochorobowości.</h1>
+        <div class="title-divider title-divider-left"><span class="divider-line"></span></div>
+
+        <h2 class="hero-subtitle hero-subtitle-landing">
+          Insulinooporność, Hashimoto, niedoczynność tarczycy, SIBO, lipoedema, nietolerancja histaminy?
+          Przestań zgadywać, co wolno Ci zjeść, gdy zalecenia dla Twoich chorób wzajemnie się wykluczają.
+          <strong>Diet-Med App</strong> to Twój żywieniowy asystent stworzony przez dietetyka klinicznego.
+        </h2>
+
+        <p class="hero-roadmap-note">
+          W działającym już <strong>Demo online</strong> przetestujesz 6 w pełni opracowanych schorzeń — kolejne jednostki (m.in. nadciśnienie tętnicze, cukrzyca, dna moczanowa) zostaną włączone w kolejnych aktualizacjach.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="https://app.diet-med-app.pl" data-demo-link="true" target="_blank" rel="noopener" class="et_pb_button et_pb_button_accent" data-track="demo_hero_click">
+            <span>Przetestuj Live Demo (PDF &amp; Excel)</span>
+            <span class="et_button_icon">&rarr;</span>
+          </a>
+          <a href="#zapis" class="btn-hero-secondary" data-track="waitlist_hero_scroll">
+            Dołącz do listy oczekujących (Android / iOS)
+          </a>
+        </div>
+
+        <div class="hero-trust-row">
+          <span>✓ 4 kliniczne kategorie bezpieczeństwa</span>
+          <span>✓ Baza ponad 2 300 klasyfikacji produktów</span>
+          <span>✓ Konsultacje online MAKRO</span>
+        </div>
+      </div>
+
+      <!-- Hero Phone Mockup -->
+      <div class="hero-phone-wrap">
+        <div class="phone-device phone-device-hero" aria-label="Podgląd aplikacji mobilnej Diet-Med App">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="app-bar">
+              <div>
+                <span class="app-brand">Diet-Med App</span>
+                <small class="app-sub">Profil: Insulinooporność + Hashimoto</small>
+              </div>
+              <span class="app-avatar">OF</span>
+            </div>
+
+            <div class="app-card-mini">
+              <div class="mini-card-head">
+                <strong>Twoja mapa produktów</strong>
+                <span class="mini-tag">384 produkty</span>
+              </div>
+              <div class="mini-cats-grid">
+                <div class="mcat mcat-zal"><span>★ Zalecane</span><strong>150</strong></div>
+                <div class="mcat mcat-doz"><span>✓ Dozwolone</span><strong>169</strong></div>
+                <div class="mcat mcat-ogr"><span>⚠ Ograniczone</span><strong>29</strong></div>
+                <div class="mcat mcat-zak"><span>✕ Zakazane</span><strong>36</strong></div>
+              </div>
+            </div>
+
+            <div class="app-card-mini app-card-fridge">
+              <div class="mini-card-head">
+                <strong>Wirtualna Lodówka</strong>
+                <span class="mini-tag mini-tag-accent">Zaznaczono: 6</span>
+              </div>
+              <div class="mini-fridge-chips">
+                <span class="mf-chip active">✓ Jaja kurze</span>
+                <span class="mf-chip active">✓ Łosoś świeży</span>
+                <span class="mf-chip active">✓ Cukinia</span>
+                <span class="mf-chip active">✓ Borówki</span>
+              </div>
+            </div>
+
+            <div class="app-ai-bubble">
+              <div class="ai-prompt-pill">„Ułóż jadłospis na 4 posiłki z mojej lodówki”</div>
+              <div class="ai-reply-row">
+                <span class="ai-spark">✨</span>
+                <div>
+                  <strong>Agent AI wygenerował plan dnia:</strong>
+                  <small>Śniadanie, II Śniadanie, Obiad, Kolacja &bull; 100% zgodne z Twoim profilem</small>
+                </div>
+              </div>
+            </div>
+
+            <a href="#symulator" class="phone-cta-btn">Wypróbuj w mini-symulatorze &darr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. SEKCJA: ZROZUMIENIE PROBLEMU (EMPATIA)                -->
+  <!-- ======================================================== -->
+  <section class="section-block section-light" id="problem">
+    <div class="container">
+      <div class="empathy-card">
+        <div class="empathy-badge">Codzienność przy wielochorobowości</div>
+        <h2 class="section-heading">Znasz to uczucie, gdy stoisz przed sklepową półką i czujesz bezsilność?</h2>
+        <div class="title-divider"><span class="divider-line"></span></div>
+        <p class="empathy-text">
+          Gdy chorujesz na kilka schorzeń jednocześnie, produkty uznawane za „zdrowe” w jednej diecie, w drugiej mogą okazać się niewskazane.
+          Zamiast spędzać wieczory na porównywaniu tabelek i martwić się, czy posiłek Ci nie zaszkodzi, sięgnij po bezpieczne wsparcie <strong>Diet-Med App</strong>.
+        </p>
+        <blockquote class="empathy-quote">
+          „Nie musisz być ekspertem od biochemii żywienia, żeby o siebie zadbać. Zrobiłam to za Ciebie.”
+          <cite>— Olga Felicjaniak, dietetyk kliniczny</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 5. SEKCJA: ROZWIĄZANIE I 4 KATEGORIE KLINICZNE           -->
+  <!-- ======================================================== -->
+  <section class="section-block section-white" id="rozwiazanie">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Jak pomaga algorytm Diet-Med?</span>
+        <h2 class="section-heading">Diet-Med App łączy kropki w Twojej diecie.</h2>
+        <div class="title-divider"><span class="divider-line"></span></div>
+        <p class="section-lead">
+          Aplikacja analizuje wszystkie Twoje schorzenia jednocześnie i podaje Ci gotową, bezpieczną odpowiedź. Bez skomplikowanego żargonu.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <article class="pillar-card">
+          <div class="pillar-icon">🔗</div>
+          <h3>Koniec ze sprzecznościami</h3>
+          <p>
+            Algorytm uwzględnia wzajemne zależności między jednostkami chorobowymi (np. łączy dietę o niskim indeksie glikemicznym z dietą przeciwzapalną i niskohistaminową) i automatycznie rozstrzyga kolizje na korzyść Twojego bezpieczeństwa.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-icon">🩺</div>
+          <h3>Wiedza prosto z gabinetu</h3>
+          <p>
+            Bazę produktów i zaleceń opracowałam na podstawie aktualnej wiedzy medycznej i wieloletniej praktyki klinicznej w gabinecie DIET-MED.
+          </p>
+        </article>
+
+        <article class="pillar-card">
+          <div class="pillar-icon">⏱️</div>
+          <h3>Oszczędność czasu i pieniędzy</h3>
+          <p>
+            Nie kupujesz produktów, które Ci szkodzą, i nie marnujesz godzin na samodzielne analizowanie sprzecznych zaleceń dietetycznych z różnych źródeł.
+          </p>
+        </article>
+      </div>
+
+      <!-- 4 Ujednolicone Kategorie Kliniczne -->
+      <div class="categories-showcase">
+        <div class="categories-head">
+          <h3>Jednolita klasyfikacja w 4 przejrzystych kategoriach bezpieczeństwa</h3>
+          <p>Niezależnie od tego, czy łączysz 2, czy 6 dolegliwości – każdy produkt trafia do jednej z 4 jednoznacznych grup, dokładnie tak jak w naszym Live Demo:</p>
+        </div>
+        <div class="categories-grid-4">
+          <div class="cat-box cat-zalecane">
+            <div class="cat-badge"><span class="cat-icon">★</span> Zalecane</div>
+            <p>Produkty szczególnie wspierające terapię żywieniową i pożądane na co dzień w Twoim zestawie schorzeń.</p>
+          </div>
+          <div class="cat-box cat-dozwolone">
+            <div class="cat-badge"><span class="cat-icon">✓</span> Dozwolone</div>
+            <p>Bezpieczne produkty bazowe, które możesz spożywać regularnie bez obaw o zaostrzenie objawów.</p>
+          </div>
+          <div class="cat-box cat-ograniczone">
+            <div class="cat-badge"><span class="cat-icon">⚠</span> Ograniczone</div>
+            <p>Dopuszczalne w kontrolowanych ilościach — system automatycznie wybiera najbezpieczniejszy dolny limit porcji.</p>
+          </div>
+          <div class="cat-box cat-zakazane">
+            <div class="cat-badge"><span class="cat-icon">✕</span> Zakazane</div>
+            <p>Produkty wykluczone z diety. Jeśli choć jedna z Twoich chorób zakazuje produktu, trafia on właśnie tutaj.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 6. SEKCJA: JAK DZIAŁA APLIKACJA MOBILNA (4 PHONE MOCKUPS)-->
+  <!-- ======================================================== -->
+  <section class="section-block section-light" id="jak-dziala">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Docelowa aplikacja mobilna (Android &amp; iOS)</span>
+        <h2 class="section-heading">Od diagnozy do gotowych posiłków z Twojej lodówki</h2>
+        <div class="title-divider"><span class="divider-line"></span></div>
+        <p class="section-lead">
+          Dzisiejsze <strong>Live Demo</strong> rozwiązuje pierwszy, najważniejszy krok: precyzyjnie ustala Twoje ograniczenia żywieniowe.
+          Zobacz, jak pełna aplikacja mobilna zamieni tę wiedzę w codzienną wygodę. Kliknij dowolny etap, aby obejrzeć ekran aplikacji:
+        </p>
+      </div>
+
+      <div class="showcase-split">
+        <!-- Lewa kolumna: 4 kroki z propozycją tekstów dopasowanych do Olgi Felicjaniak -->
+        <div class="feature-steps-list" role="tablist" aria-label="Moduły aplikacji mobilnej Diet-Med App">
+
+          <button type="button" class="feature-step-card active" data-screen="profile" role="tab" aria-selected="true">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h3>Twoje ograniczenia zawsze pod ręką w Profilu</h3>
+              <p>
+                Zaczynasz od prostego wywiadu zdrowotnego (dokładnie takiego, jak w naszym Demo online).
+                Aplikacja zapisuje na stałe w Twoim profilu pełną listę zaleceń dla wybranych schorzeń — masz ją przy sobie na każdych zakupach, bez powracania do papierowych tabelek.
+              </p>
+            </div>
+          </button>
+
+          <button type="button" class="feature-step-card" data-screen="fridge" role="tab" aria-selected="false">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h3>Wirtualna Lodówka — zaznacz, co masz w domu</h3>
+              <p>
+                Na podstawie Twojego profilu widzisz uporządkowaną listę bezpiecznych produktów.
+                Jednym dotknięciem odznaczasz to, co akurat znajduje się w Twojej lodówce i spiżarni – aplikacja pamięta Twoje zapasy.
+              </p>
+            </div>
+          </button>
+
+          <button type="button" class="feature-step-card" data-screen="ai" role="tab" aria-selected="false">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h3>Agent AI: jadłospis na 4 posiłki jednym poleceniem</h3>
+              <p>
+                Nie musisz zastanawiać się, co ugotować. Wydajesz Agentowi AI jedną komendę, a on komponuje zbilansowany plan na cały dzień (<strong>Śniadanie, II Śniadanie, Obiad, Kolacja</strong>) wyłącznie ze składników z Twojej lodówki, omijając produkty zakazane.
+              </p>
+            </div>
+          </button>
+
+          <button type="button" class="feature-step-card" data-screen="biometrics" role="tab" aria-selected="false">
+            <div class="step-num">04</div>
+            <div class="step-body">
+              <h3>Dane biologiczne + spotkanie online z dietetykiem (MAKRO)</h3>
+              <p>
+                Wpisujesz swój wzrost, wagę oraz aktywność fizyczną. Kiedy potrzebujesz precyzyjnego wyliczenia dziennej kaloryczności i rozkładu <strong>MAKRO</strong> (białka, tłuszcze, węglowodany), bezpośrednio w aplikacji umawiasz konsultację online ze mną.
+              </p>
+            </div>
+          </button>
+
+        </div>
+
+        <!-- Prawa kolumna: Interaktywna makieta telefonu przełączająca 4 ekrany -->
+        <div class="showcase-phone-stage">
+          <div class="phone-device phone-device-showcase">
+            <div class="phone-notch"></div>
+            <div class="phone-screen">
+
+              <!-- EKRAN 1: PROFIL -->
+              <div class="mockup-screen active" id="mockup-profile">
+                <div class="mock-top">
+                  <span class="mock-title">Mój Profil Zdrowotny</span>
+                  <span class="mock-badge">Zapisano</span>
+                </div>
+                <div class="mock-section-label">Aktywne schorzenia w profilu:</div>
+                <div class="mock-tags">
+                  <span class="mtag mtag-on">✓ Insulinooporność</span>
+                  <span class="mtag mtag-on">✓ Hashimoto</span>
+                  <span class="mtag mtag-on">✓ SIBO</span>
+                </div>
+                <div class="mock-info-box">
+                  <strong>Połączone wytyczne (384 produkty):</strong>
+                  <div class="mock-bars">
+                    <div class="mbar"><span>★ Zalecane</span><div class="mbar-track"><div class="mbar-fill fill-zal" style="width:24%"></div></div><strong>82</strong></div>
+                    <div class="mbar"><span>✓ Dozwolone</span><div class="mbar-track"><div class="mbar-fill fill-doz" style="width:42%"></div></div><strong>154</strong></div>
+                    <div class="mbar"><span>⚠ Ograniczone</span><div class="mbar-track"><div class="mbar-fill fill-ogr" style="width:10%"></div></div><strong>34</strong></div>
+                    <div class="mbar"><span>✕ Zakazane</span><div class="mbar-track"><div class="mbar-fill fill-zak" style="width:30%"></div></div><strong>114</strong></div>
+                  </div>
+                </div>
+                <div class="mock-footer-note">Ostatnia aktualizacja profilu: dzisiaj • Eksport PDF/XLSX dostępny</div>
+              </div>
+
+              <!-- EKRAN 2: WIRTUALNA LODÓWKA -->
+              <div class="mockup-screen" id="mockup-fridge">
+                <div class="mock-top">
+                  <span class="mock-title">Wirtualna Lodówka</span>
+                  <span class="mock-badge mock-badge-accent">6 w domu</span>
+                </div>
+                <div class="mock-section-label">Produkty z Twojego profilu — odznacz dostępne:</div>
+                <div class="mock-fridge-list">
+                  <div class="mfridge-item checked"><span>✓</span><div><strong>Jaja kurze</strong><small>★ Zalecane &bull; Nabiał i jaja</small></div></div>
+                  <div class="mfridge-item checked"><span>✓</span><div><strong>Indyk (pierś)</strong><small>★ Zalecane &bull; Mięso</small></div></div>
+                  <div class="mfridge-item checked"><span>✓</span><div><strong>Cukinia</strong><small>✓ Dozwolone &bull; Warzywa</small></div></div>
+                  <div class="mfridge-item checked"><span>✓</span><div><strong>Borówka amerykańska</strong><small>✓ Dozwolone &bull; Owoce</small></div></div>
+                  <div class="mfridge-item"><span></span><div><strong>Łosoś świeży</strong><small>★ Zalecane &bull; Ryby</small></div></div>
+                  <div class="mfridge-item blocked"><span>✕</span><div><strong>Pieczywo pszenne</strong><small>✕ Zakazane przy Hashimoto/SIBO</small></div></div>
+                </div>
+              </div>
+
+              <!-- EKRAN 3: AGENT AI 4 POSIŁKI -->
+              <div class="mockup-screen" id="mockup-ai">
+                <div class="mock-top">
+                  <span class="mock-title">Agent AI • Jadłospis</span>
+                  <span class="mock-badge">4 posiłki</span>
+                </div>
+                <div class="mock-prompt-box">
+                  <small>Twoja komenda (prompt):</small>
+                  <p>„Ułóż jadłospis na 4 posiłki na cały dzień ze składników w mojej lodówce”</p>
+                </div>
+                <div class="mock-meals-list">
+                  <div class="mmeal"><span>08:00 &bull; Śniadanie</span><strong>Omlet z cukinią i ziołami</strong></div>
+                  <div class="mmeal"><span>11:30 &bull; II Śniadanie</span><strong>Koktajl migdałowy z borówkami</strong></div>
+                  <div class="mmeal"><span>14:30 &bull; Obiad</span><strong>Duszony indyk z brokułem i gryką</strong></div>
+                  <div class="mmeal"><span>18:30 &bull; Kolacja</span><strong>Pieczony łosoś z sałatką z cukinii</strong></div>
+                </div>
+              </div>
+
+              <!-- EKRAN 4: BIOMETRIA I KONSULTACJA MAKRO -->
+              <div class="mockup-screen" id="mockup-biometrics">
+                <div class="mock-top">
+                  <span class="mock-title">Biometria &amp; MAKRO</span>
+                  <span class="mock-badge">Online</span>
+                </div>
+                <div class="mock-bio-grid">
+                  <div class="mbio-box"><small>Wzrost</small><strong>168 cm</strong></div>
+                  <div class="mbio-box"><small>Waga</small><strong>66 kg</strong></div>
+                  <div class="mbio-box mbio-wide"><small>Aktywność fizyczna</small><strong>Umiarkowana (3x/tydz.)</strong></div>
+                </div>
+                <div class="mock-consult-card">
+                  <strong>Konsultacja online z dietetykiem</strong>
+                  <p>Olga Felicjaniak ustali Twoje dokładne dzienne zapotrzebowanie kcal oraz rozkład MAKRO (B/T/W).</p>
+                  <span class="mconsult-btn">Umów spotkanie wideo &rarr;</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="mockup-dots" aria-hidden="true">
+            <span class="mdot active" data-screen="profile"></span>
+            <span class="mdot" data-screen="fridge"></span>
+            <span class="mdot" data-screen="ai"></span>
+            <span class="mdot" data-screen="biometrics"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 7. SEKCJA: INTERAKTYWNY MINI-SYMULATOR (LODÓWKA + AI)    -->
+  <!-- ======================================================== -->
+  <section class="section-block section-white" id="symulator">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Interaktywny podgląd aplikacji mobilnej</span>
+        <h2 class="section-heading">Mini-symulator: Twoja lodówka &rarr; 4 posiłki od Agenta AI</h2>
+        <div class="title-divider"><span class="divider-line"></span></div>
+        <p class="section-lead">
+          Sprawdź na żywo logikę przyszłej aplikacji mobilnej: wybierz swoje schorzenia (używamy prawdziwych reguł z bazy DIET-MED!),
+          zaznacz co masz w lodówce i wydaj Agentowi AI komendę ułożenia jadłospisu.
+        </p>
+      </div>
+
+      <div class="simulator-shell">
+        <div class="simulator-grid">
+
+          <!-- Lewy panel symulatora: Schorzenia + Lodówka + Biometria + Prompt -->
+          <div class="sim-controls-col">
+
+            <!-- Krok A: Schorzenia -->
+            <div class="sim-panel">
+              <div class="sim-panel-head">
+                <span class="sim-step-badge">1</span>
+                <h3>Wybierz schorzenia w profilu (6 aktywnych baz)</h3>
+              </div>
+              <div id="simAilmentsContainer" class="sim-ailments-chips"></div>
+              <p class="sim-helper-note">
+                Wskazówka: zaznacz np. <em>Nietolerancję histaminy</em> i obserwuj, jak status <strong>awokado</strong> i <strong>szpinaku</strong> w lodówce zmienia się w czasie rzeczywistym na <strong>Zakazane</strong>.
+              </p>
+            </div>
+
+            <!-- Krok B: Lodówka -->
+            <div class="sim-panel">
+              <div class="sim-panel-head">
+                <span class="sim-step-badge">2</span>
+                <h3>Co masz dzisiaj w lodówce?</h3>
+                <span id="simFridgeCount" class="sim-count-pill">0 zaznaczonych</span>
+              </div>
+              <div id="simFridgeContainer" class="sim-fridge-grid"></div>
+            </div>
+
+            <!-- Krok C: Dane biologiczne (opcjonalnie) -->
+            <div class="sim-panel">
+              <div class="sim-panel-head">
+                <span class="sim-step-badge">3</span>
+                <h3>Twoje dane biologiczne (podgląd przed konsultacją MAKRO)</h3>
+              </div>
+              <div class="sim-bio-row">
+                <label class="sim-field">
+                  <span>Wzrost (cm)</span>
+                  <input type="number" id="simHeight" min="120" max="230" value="168">
+                </label>
+                <label class="sim-field">
+                  <span>Waga (kg)</span>
+                  <input type="number" id="simWeight" min="35" max="220" step="0.5" value="65">
+                </label>
+                <label class="sim-field">
+                  <span>Aktywność fizyczna</span>
+                  <select id="simActivity">
+                    <option value="1.3">Niska (praca biurowa)</option>
+                    <option value="1.5" selected>Umiarkowana (spacery, 2-3x trening)</option>
+                    <option value="1.75">Wysoka (regularny sport)</option>
+                  </select>
+                </label>
+              </div>
+              <div id="simBioEstimate" class="sim-bio-estimate"></div>
+            </div>
+
+            <!-- Krok D: Prompt -->
+            <div class="sim-panel sim-panel-prompt">
+              <div class="sim-panel-head">
+                <span class="sim-step-badge">4</span>
+                <h3>Komenda (Prompt) dla Agenta AI</h3>
+              </div>
+              <div class="sim-preset-prompts">
+                <button type="button" class="preset-chip" data-prompt="Ułóż bezpieczny jadłospis na 4 posiłki na cały dzień ze składników dostępnych w mojej lodówce.">Cały dzień (4 posiłki)</button>
+                <button type="button" class="preset-chip" data-prompt="Zrób szybki plan 4 prostych, lekkostrawnych posiłków do pracy z mojej lodówki.">Szybkie posiłki do pracy</button>
+              </div>
+              <textarea id="simPromptInput" class="sim-prompt-textarea" rows="2">Ułóż bezpieczny jadłospis na 4 posiłki na cały dzień ze składników dostępnych w mojej lodówce.</textarea>
+              <button type="button" id="simGenerateBtn" class="et_pb_button et_pb_button_accent sim-generate-btn">
+                <span>Uruchom Agenta AI &mdash; generuj 4 posiłki</span>
+                <span class="et_button_icon">✨</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Prawy panel symulatora: Wynik Agenta AI -->
+          <div class="sim-output-col">
+            <div class="sim-output-card">
+              <div class="sim-output-header">
+                <div>
+                  <span class="sim-ai-label">Asystent Żywieniowy Diet-Med AI</span>
+                  <h3>Wygenerowany plan dnia (4 posiłki)</h3>
+                </div>
+                <span class="sim-mode-tag">Symulator</span>
+              </div>
+
+              <div id="simOutputBody" class="sim-output-body">
+                <!-- Wypełniane dynamicznie przez main.js -->
+              </div>
+
+              <div class="sim-output-actions">
+                <a href="https://app.diet-med-app.pl" data-demo-link="true" target="_blank" rel="noopener" class="et_pb_button" data-track="demo_simulator_click">
+                  <span>Pełna lista 384 produktów w Live Demo (PDF &amp; Excel)</span>
+                  <span class="et_button_icon">&rarr;</span>
+                </a>
+                <button type="button" id="simTransferToConsultBtn" class="btn-outline-dark">
+                  Przenieś moje parametry i umów ustalenie MAKRO online &darr;
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 8. SEKCJA: CO DZIAŁA DZIŚ (DEMO) VS APLIKACJA MOBILNA     -->
+  <!-- ======================================================== -->
+  <section class="section-block section-light" id="demo-vs-app">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Rozwój projektu krok po kroku</span>
+        <h2 class="section-heading">Sprawdź Demo już dzisiaj, odbierz pełną aplikację po premierze</h2>
+        <div class="title-divider"><span class="divider-line"></span></div>
+      </div>
+
+      <div class="compare-grid">
+        <div class="compare-card compare-card-demo">
+          <div class="compare-tag">DOSTĘPNE OD RĘKI (LIVE DEMO)</div>
+          <h3>Diet-Med App Demo (<code>app.diet-med-app</code>)</h3>
+          <p class="compare-desc">Działający już teraz silnik analizy wielochorobowości i eksportu dokumentów:</p>
+          <ul class="compare-list">
+            <li>Wybór spośród <strong>6 w pełni opracowanych schorzeń</strong> (<em>Insulinooporność, Hashimoto, Niedoczynność tarczycy, SIBO, Lipoedema, Nietolerancja histaminy</em>)</li>
+            <li>Rozstrzyganie konfliktów w <strong>4 kategoriach</strong> (<em>Zalecane, Dozwolone, Ograniczone, Zakazane</em>)</li>
+            <li>Eksport eleganckiego raportu <strong>PDF</strong> z podsekcjami żywieniowymi A-Z</li>
+            <li>Eksport arkusza <strong>Excel (.xlsx)</strong> z kolumną „Dostępne?” do odznaczania w kuchni</li>
+          </ul>
+          <a href="https://app.diet-med-app.pl" data-demo-link="true" target="_blank" rel="noopener" class="et_pb_button et_pb_button_accent" data-track="demo_compare_click">
+            Otwórz Live Demo teraz &rarr;
+          </a>
+        </div>
+
+        <div class="compare-card compare-card-mobile">
+          <div class="compare-tag compare-tag-dark">WKRÓTCE (ANDROID &amp; iOS)</div>
+          <h3>Pełna Aplikacja Mobilna Diet-Med App</h3>
+          <p class="compare-desc">Wszystkie możliwości Demo wzbogacone o codzienne wsparcie AI i opiekę dietetyka:</p>
+          <ul class="compare-list">
+            <li>Zapisane na stałe ograniczenia w <strong>indywidualnym profilu użytkownika</strong></li>
+            <li>Interaktywna <strong>Wirtualna Lodówka</strong> do odhaczania produktów w domu</li>
+            <li><strong>Agent AI</strong> układający jadłospis na 4 posiłki na cały dzień jednym promptem</li>
+            <li><strong>Profil biologiczny</strong> (wzrost, waga, aktywność) + <strong>rezerwacja spotkania online</strong> w celu ustalenia MAKRO</li>
+            <li>Stopniowe dodawanie kolejnych jednostek chorobowych (m.in. nadciśnienie, cukrzyca)</li>
+          </ul>
+          <a href="#zapis" class="btn-outline-dark">
+            Zapisz się na Waiting Listę &darr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 9. SEKCJA: O TWÓRCZYNI (OLGA FELICJANIAK)               -->
+  <!-- ======================================================== -->
+  <section class="section-block section-white" id="o-tworczyni">
+    <div class="container">
+      <div class="creator-card">
+        <div class="creator-photo-col">
+          <div class="creator-portrait-box" aria-label="Olga Felicjaniak — Dietetyk Kliniczny">
+            <!-- Jeśli dodasz zdjęcie assets/olga.jpg, wyświetli się automatycznie zamiast monogramu -->
+            <img src="assets/olga.jpg" alt="Olga Felicjaniak — Dietetyk Kliniczny DIET-MED" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="creator-monogram">
+              <span>OF</span>
+              <small>DIET-MED Poznań</small>
+            </div>
+          </div>
+        </div>
+        <div class="creator-content-col">
+          <span class="section-eyebrow">O twórczyni aplikacji</span>
+          <h2 class="section-heading">Stworzona z myślą o moich pacjentach</h2>
+          <div class="title-divider title-divider-left"><span class="divider-line"></span></div>
+          <p class="creator-lead">
+            Nazywam się <strong>Olga Felicjaniak</strong>, jestem dietetykiem klinicznym.
+            Na co dzień w swoim gabinecie widzę, jak trudnym wyzwaniem jest ułożenie jadłospisu, gdy organizm zmaga się z kilkoma problemami naraz.
+            Stworzyłam <strong>Diet-Med App</strong>, aby dać Ci narzędzie, które będzie Cię wspierać każdego dnia w dokonywaniu właściwych wyborów dietetycznych.
+          </p>
+          <div class="creator-meta-row">
+            <span>📍 Gabinet DIET-MED, ul. Milczańska 48A, Poznań</span>
+            <span>🌐 <a href="https://diet-med.pl/" target="_blank" rel="noopener" class="text-link">diet-med.pl</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 10. SEKCJA KONWERSJI: WAITING LIST + KONSULTACJA MAKRO   -->
+  <!-- ======================================================== -->
+  <section class="section-block section-light" id="zapis">
+    <div class="container">
+      <div class="section-header-center">
+        <span class="section-eyebrow">Zapisz się lub umów wizytę</span>
+        <h2 class="section-heading">Dołącz do listy oczekujących lub ustal MAKRO z dietetykiem</h2>
+        <div class="title-divider"><span class="divider-line"></span></div>
+        <p class="section-lead">
+          Wybierz formularz dopasowany do Twoich potrzeb. Twoje dane trafiają bezpośrednio do bezpiecznej bazy gabinetu DIET-MED.
+        </p>
+      </div>
+
+      <div class="conversion-grid">
+
+        <!-- FORMULARZ 1: WAITING LIST -->
+        <div class="conv-card">
+          <div class="conv-card-head">
+            <div>
+              <span class="conv-pill">Premiera Android &amp; iOS</span>
+              <h3>Zapisz się na Waiting Listę</h3>
+            </div>
+            <div class="waitlist-counter-box" title="Liczba osób zapisanych w bazie">
+              <strong id="waitlistTotalCount">...</strong>
+              <small>na liście</small>
+            </div>
+          </div>
+          <p class="conv-sub">
+            Aplikacja mobilna nie jest jeszcze w sklepach App Store i Google Play. Zostaw swój e-mail, aby otrzymać dostęp w pierwszej turze (Early Access).
+          </p>
+
+          <form id="waitlistForm" class="landing-form" novalidate>
+            <div class="form-group">
+              <label for="wlEmail">Adres e-mail <span class="req">*</span></label>
+              <input type="email" id="wlEmail" required placeholder="np. anna@przyklad.pl">
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="wlName">Imię (opcjonalnie)</label>
+                <input type="text" id="wlName" placeholder="Twoje imię">
+              </div>
+              <div class="form-group">
+                <label for="wlPlatform">System telefonu</label>
+                <select id="wlPlatform">
+                  <option value="oba">Android / iOS (oba)</option>
+                  <option value="android">Android (Google Play)</option>
+                  <option value="ios">iPhone (App Store)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="wlAilments">Które schorzenia Cię interesują? (opcjonalnie)</label>
+              <input type="text" id="wlAilments" placeholder="np. Insulinooporność, Hashimoto, SIBO...">
+            </div>
+
+            <div class="rodo-check-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="wlRodo" required>
+                <span>
+                  Akceptuję <a href="polityka-prywatnosci.html" target="_blank" class="text-link">Politykę Prywatności (RODO)</a> i wyrażam zgodę na powiadomienie o starcie aplikacji mobilnej Diet-Med App. <span class="req">*</span>
+                </span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" id="wlMarketing">
+                <span>Chcę otrzymywać porady dietetyczne oraz informacje o nowych schorzeniach w bazie.</span>
+              </label>
+            </div>
+
+            <div id="wlFeedback" class="form-feedback" style="display:none;" role="status"></div>
+
+            <button type="submit" id="wlSubmitBtn" class="et_pb_button et_pb_button_accent btn-full">
+              Zapisz mnie na listę oczekujących &rarr;
+            </button>
+          </form>
+        </div>
+
+        <!-- FORMULARZ 2: KONSULTACJA ONLINE MAKRO -->
+        <div class="conv-card">
+          <div class="conv-card-head">
+            <div>
+              <span class="conv-pill conv-pill-navy">Spotkanie z dietetykiem</span>
+              <h3>Umów konsultację online (MAKRO)</h3>
+            </div>
+          </div>
+          <p class="conv-sub">
+            Chcesz od razu skonsultować swoje wyniki, podać dane biologiczne i wspólnie z dietetykiem klinicznym ustalić dzienne zapotrzebowanie <strong>MAKRO</strong>? Zostaw zgłoszenie:
+          </p>
+
+          <form id="consultForm" class="landing-form" novalidate>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="csName">Imię i nazwisko <span class="req">*</span></label>
+                <input type="text" id="csName" required placeholder="Janina Kowalska">
+              </div>
+              <div class="form-group">
+                <label for="csEmail">Adres e-mail <span class="req">*</span></label>
+                <input type="email" id="csEmail" required placeholder="twoj@email.pl">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="csPhone">Telefon (opcjonalnie)</label>
+                <input type="tel" id="csPhone" placeholder="+48 600 000 000">
+              </div>
+              <div class="form-group">
+                <label for="csContactType">Forma spotkania</label>
+                <select id="csContactType">
+                  <option value="online_video">Konsultacja online (wideo)</option>
+                  <option value="telefon">Rozmowa telefoniczna</option>
+                  <option value="email">Kontakt mailowy (ustalenie terminu)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label for="csHeight">Wzrost (cm)</label>
+                <input type="number" id="csHeight" min="100" max="240" placeholder="np. 168">
+              </div>
+              <div class="form-group">
+                <label for="csWeight">Waga (kg)</label>
+                <input type="number" id="csWeight" min="30" max="300" step="0.5" placeholder="np. 65">
+              </div>
+              <div class="form-group">
+                <label for="csActivity">Aktywność</label>
+                <select id="csActivity">
+                  <option value="">Wybierz...</option>
+                  <option value="Niska">Niska</option>
+                  <option value="Umiarkowana">Umiarkowana</option>
+                  <option value="Wysoka">Wysoka</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="csAilments">Schorzenia i cel (np. ustalenie MAKRO)</label>
+              <textarea id="csAilments" rows="2" placeholder="Opisz krótko swoje dolegliwości lub preferowany dzień/godzinę spotkania online..."></textarea>
+            </div>
+
+            <div class="rodo-check-group">
+              <label class="checkbox-label">
+                <input type="checkbox" id="csRodo" required>
+                <span>
+                  Akceptuję <a href="polityka-prywatnosci.html" target="_blank" class="text-link">Politykę Prywatności (RODO)</a> i zgadzam się na kontakt w celu umówienia konsultacji. <span class="req">*</span>
+                </span>
+              </label>
+            </div>
+
+            <div id="csFeedback" class="form-feedback" style="display:none;" role="status"></div>
+
+            <button type="submit" id="csSubmitBtn" class="et_pb_button btn-full">
+              Wyślij zgłoszenie na konsultację online &rarr;
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 11. PODSUMOWANIE I DOLNE WEZWANIE DO DZIAŁANIA           -->
+  <!-- ======================================================== -->
+  <section class="section-bottom-cta">
+    <div class="container">
+      <h2>Zadbaj o swoje zdrowie bez zgadywania.</h2>
+      <p>
+        Dołącz do osób, które odzyskały kontrolę nad swoim talerzem i samopoczuciem.
+        Sprawdź silnik zaleceń w Live Demo już dzisiaj albo zapisz się na premierę aplikacji mobilnej (Android &amp; iOS).
+      </p>
+      <div class="hero-cta-group hero-cta-center">
+        <a href="https://app.diet-med-app.pl" data-demo-link="true" target="_blank" rel="noopener" class="et_pb_button et_pb_button_accent" data-track="demo_footer_click">
+          Wypróbuj Live Demo teraz &rarr;
+        </a>
+        <a href="#zapis" class="btn-hero-secondary">
+          Dołącz do Waiting Listy
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 12. STOPKA (#main-footer)                                -->
+  <!-- ======================================================== -->
+  <footer id="main-footer">
+    <div id="footer-bottom">
+      <div class="container clearfix">
+        <div id="footer-info">
+          © 2026 DIET-MED Dietetyka Praktyczna — Olga Felicjaniak &nbsp;|&nbsp;
+          <a href="polityka-prywatnosci.html">Polityka Prywatności (RODO)</a> &nbsp;|&nbsp;
+          <a href="https://app.diet-med-app.pl" data-demo-link="true" target="_blank" rel="noopener">Live Demo (app.diet-med-app)</a> &nbsp;|&nbsp;
+          <a href="https://diet-med.pl/" target="_blank" rel="noopener">diet-med.pl</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- 13. BANNER COOKIES (GA4 / META PIXEL CONSENT)            -->
+  <!-- ======================================================== -->
+  <div id="cookieBanner" class="cookie-banner" style="display:none;" role="dialog" aria-label="Informacja o plikach cookies">
+    <div class="container cookie-banner-inner">
+      <p>
+        Ta strona korzysta z niezbędnych plików cookies oraz opcjonalnych narzędzi analitycznych (GA4 / Meta Pixel).
+        Szczegóły znajdziesz w <a href="polityka-prywatnosci.html" class="cookie-link">Polityce Prywatności (RODO)</a>.
+      </p>
+      <div class="cookie-actions">
+        <button type="button" id="cookieRejectBtn" class="btn-cookie-outline">Tylko niezbędne</button>
+        <button type="button" id="cookieAcceptBtn" class="btn-cookie-accept">Akceptuję wszystkie</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js?v=1.0"></script>
+</body>
+</html>
